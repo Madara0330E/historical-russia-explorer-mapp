@@ -5,16 +5,19 @@ import { HistoricalEvent } from "@/types";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { CommentList } from "@/components/CommentList";
+import { MarkerClusterer } from "@googlemaps/markerclusterer";
 
 declare global {
   interface Window {
-    ymaps: any;
+    google: {
+      maps: typeof google.maps;
+    };
   }
 }
 
-export function YandexMap() {
+export function GoogleEarthMap() {
   const mapRef = useRef<HTMLDivElement>(null);
-  const [mapInstance, setMapInstance] = useState<any>(null);
+  const [mapInstance, setMapInstance] = useState<google.maps.Map | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<HistoricalEvent | null>(
     null
@@ -22,101 +25,66 @@ export function YandexMap() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   useEffect(() => {
-    if (!document.getElementById("yandex-maps")) {
+    if (!document.getElementById("google-earth")) {
       const script = document.createElement("script");
-      script.src =
-        "https://api-maps.yandex.ru/2.1/?apikey=499b20b5-e13c-43ae-b359-44680ddaed75&lang=ru_RU";
-      script.id = "yandex-maps";
+      script.src = `https://maps.googleapis.com/maps/api/js?key=473264783548327458453889634783643278642&libraries=places`;
+      script.id = "google-earth";
       script.async = true;
       script.onload = () => setIsLoaded(true);
       document.body.appendChild(script);
     } else {
       setIsLoaded(true);
     }
-
-    return () => {
-      if (mapInstance) {
-        mapInstance.destroy();
-      }
-    };
   }, []);
 
   useEffect(() => {
     if (!isLoaded || !mapRef.current) return;
 
-    window.ymaps.ready(() => {
-      const map = new window.ymaps.Map(mapRef.current, {
-        center: [55.76, 37.64],
-        zoom: 5,
-        controls: ["zoomControl", "fullscreenControl"],
+    const map = new window.google.maps.Map(mapRef.current, {
+      center: { lat: 55.76, lng: 37.64 },
+      zoom: 5,
+      mapTypeId: "terrain",
+      styles: [
+        { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+        { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+        { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+      ],
+    });
+
+    setMapInstance(map);
+
+    const markers = events.map((event: HistoricalEvent) => {
+      const marker = new window.google.maps.Marker({
+        position: { lat: event.location.lat, lng: event.location.lon },
+        map,
+        title: event.title,
+        icon: {
+          path: window.google.maps.SymbolPath.CIRCLE,
+          fillColor:
+            event.category === "battle"
+              ? "#FF0000"
+              : event.category === "political"
+              ? "#0000FF"
+              : "#FFFF00",
+          fillOpacity: 1,
+          strokeWeight: 1,
+          scale: 8,
+        },
       });
 
-      setMapInstance(map);
-
-      const isDarkTheme = document.documentElement.classList.contains("dark");
-
-      if (isDarkTheme) {
-        map.panes.get("ground").getElement().style.filter =
-          "invert(100%) hue-rotate(180deg) brightness(0.8)";
-      }
-
-      const clusterer = new window.ymaps.Clusterer({
-        preset: "islands#darkBlueClusterIcons",
-        groupByCoordinates: false,
-        clusterDisableClickZoom: false,
+      marker.addListener("click", () => {
+        setSelectedEvent(event);
+        setIsSheetOpen(true);
       });
 
-      const placemarks = events.map((event: HistoricalEvent) => {
-        const placemark = new window.ymaps.Placemark(
-          [event.location.lat, event.location.lon],
-          {
-            hintContent: event.title,
-          },
-          {
-            preset:
-              event.category === "battle"
-                ? "islands#redDotIcon"
-                : event.category === "political"
-                ? "islands#darkBlueDotIcon"
-                : "islands#yellowDotIcon",
-          }
-        );
+      return marker;
+    });
 
-        placemark.events.add("click", () => {
-          setSelectedEvent(event);
-          setIsSheetOpen(true);
-        });
-
-        return placemark;
-      });
-
-      clusterer.add(placemarks);
-      map.geoObjects.add(clusterer);
+    new MarkerClusterer({
+      map,
+      markers,
     });
   }, [isLoaded]);
-
-  useEffect(() => {
-    if (!mapInstance) return;
-
-    const observer = new MutationObserver(() => {
-      const isDarkTheme = document.documentElement.classList.contains("dark");
-      const groundPane = mapInstance.panes.get("ground").getElement();
-
-      if (isDarkTheme) {
-        groundPane.style.filter =
-          "invert(100%) hue-rotate(180deg) brightness(0.8)";
-      } else {
-        groundPane.style.filter = "";
-      }
-    });
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-
-    return () => observer.disconnect();
-  }, [mapInstance]);
 
   return (
     <>
@@ -124,7 +92,6 @@ export function YandexMap() {
         ref={mapRef}
         className="w-full h-[calc(100vh-4rem)] md:h-[calc(100vh-4rem)] h-[calc(70vh-4rem)]"
       />
-
       <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
         <SheetContent className="w-full sm:max-w-xl">
           {selectedEvent && (
