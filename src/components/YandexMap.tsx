@@ -5,6 +5,8 @@ import { HistoricalEvent } from "@/types";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { CommentList } from "@/components/CommentList";
+import { Button } from "@/components/ui/button";
+import { Share2 } from "lucide-react";
 
 declare global {
   interface Window {
@@ -138,6 +140,51 @@ export function YandexMap() {
                 </div>
 
                 <p className="text-base/relaxed">{selectedEvent.description}</p>
+
+                <div className="flex gap-2">
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    className="bg-[#0077FF] hover:bg-[#0077FF]/90 text-white dark:bg-[#0077FF] dark:hover:bg-[#0077FF]/90 dark:text-white"
+                    onClick={() => {
+                      const url = `https://vk.com/share.php?url=${encodeURIComponent(
+                        window.location.href
+                      )}&title=${encodeURIComponent(
+                        selectedEvent.title
+                      )}&description=${encodeURIComponent(
+                        selectedEvent.description
+                      )}`;
+                      window.open(url, "_blank");
+                    }}
+                  >
+                    <img
+                      src="/vk.svg"
+                      alt="VK"
+                      className="w-4 h-4 mr-2 brightness-0 invert"
+                    />
+                    ВКонтакте
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    className="bg-[#26A5E4] hover:bg-[#26A5E4]/90 text-white dark:bg-[#26A5E4] dark:hover:bg-[#26A5E4]/90 dark:text-white"
+                    onClick={() => {
+                      const url = `https://t.me/share/url?url=${encodeURIComponent(
+                        window.location.href
+                      )}&text=${encodeURIComponent(
+                        `${selectedEvent.title}\n${selectedEvent.description}`
+                      )}`;
+                      window.open(url, "_blank");
+                    }}
+                  >
+                    <img
+                      src="/telegram.svg"
+                      alt="Telegram"
+                      className="w-4 h-4 mr-2 brightness-0 invert"
+                    />
+                    Telegram
+                  </Button>
+                </div>
 
                 {selectedEvent.images && selectedEvent.images.length > 0 && (
                   <div className="space-y-4">
