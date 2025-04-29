@@ -27,8 +27,7 @@ export interface Ruler {
 
 export interface Comment {
   id: string;
-  eventId: string;
   author: string;
-  text: string;
-  date: string;
+  body: string;
+  createdAtUtc: string; 
 }

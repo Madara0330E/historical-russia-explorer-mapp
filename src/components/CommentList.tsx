@@ -30,11 +30,14 @@ export function CommentList({ eventId }: CommentListProps) {
   const fetchComments = async () => {
     try {
       const token = Cookies.get("authToken");
-      const response = await axios.get(`http://localhost:5000/api/comments/${eventId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `http://localhost:5000/api/comments/${eventId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       if (response.data.success) {
         setComments(response.data.comments);
       }
@@ -49,9 +52,13 @@ export function CommentList({ eventId }: CommentListProps) {
 
   const handleSendCode = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/send-code", email, {
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/send-code",
+        email,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
       if (response.data.success) {
         toast({
@@ -71,9 +78,13 @@ export function CommentList({ eventId }: CommentListProps) {
 
   const handleVerifyCode = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/verify-code", { email, code }, {
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/verify-code",
+        { email, code },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
       if (response.data.success) {
         Cookies.set("authToken", response.data.token, { expires: 7 });
@@ -202,7 +213,9 @@ export function CommentList({ eventId }: CommentListProps) {
               <Card key={comment.id} className="bg-muted/30">
                 <CardHeader className="py-3 px-4">
                   <div className="flex justify-between items-center">
-                    <CardTitle className="text-base">{comment.author}</CardTitle>
+                    <CardTitle className="text-base">
+                      {comment.author}
+                    </CardTitle>
                     <span className="text-xs text-muted-foreground">
                       {new Date(comment.createdAtUtc).toLocaleDateString()}
                     </span>
@@ -226,14 +239,21 @@ export function CommentList({ eventId }: CommentListProps) {
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmitComment} className="space-y-4">
-                <div>
-                  <Input
-                    placeholder="Ваше имя"
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
-                    className="max-w-md"
-                  />
-                </div>
+                {!author && ( 
+                  <div>
+                    <Input
+                      placeholder="Ваше имя"
+                      value={author}
+                      onChange={(e) => setAuthor(e.target.value)}
+                      onBlur={(e) => {
+                        if (e.target.value.trim()) {
+                          setAuthor(e.target.value.trim());
+                        }
+                      }}
+                      className="max-w-md"
+                    />
+                  </div>
+                )}
                 <div>
                   <Textarea
                     placeholder="Ваш комментарий..."
