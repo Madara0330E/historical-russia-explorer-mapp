@@ -26,7 +26,6 @@ export function YandexMap() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [clusterer, setClusterer] = useState<any>(null);
 
-  // Состояния для фильтров
   const [search, setSearch] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<EventCategory[]>(
     []
@@ -34,7 +33,6 @@ export function YandexMap() {
   const [startYear, setStartYear] = useState<string>("");
   const [endYear, setEndYear] = useState<string>("");
 
-  // Фильтрация событий
   const filteredEvents = events.filter((event) => {
     const matchesSearch =
       search === "" ||
@@ -52,7 +50,6 @@ export function YandexMap() {
     return matchesSearch && matchesCategory && matchesYearRange;
   });
 
-  // Инициализация карты
   useEffect(() => {
     if (!document.getElementById("yandex-maps")) {
       const script = document.createElement("script");
@@ -73,7 +70,6 @@ export function YandexMap() {
     };
   }, []);
 
-  // Создание карты и маркеров
   useEffect(() => {
     if (!isLoaded || !mapRef.current) return;
 
@@ -104,7 +100,6 @@ export function YandexMap() {
     });
   }, [isLoaded]);
 
-  // Обновление маркеров при изменении фильтров
   useEffect(() => {
     if (!clusterer || !mapInstance) return;
 
@@ -136,7 +131,6 @@ export function YandexMap() {
     clusterer.add(placemarks);
   }, [filteredEvents, clusterer, mapInstance]);
 
-  // Обработка темной темы
   useEffect(() => {
     if (!mapInstance) return;
 
@@ -161,7 +155,7 @@ export function YandexMap() {
   }, [mapInstance]);
 
   return (
-    <div className="flex flex-col min-h-[calc(100vh-4rem)]">
+    <div className="flex flex-col min-h-[calc(80vh-4rem)]">
       <div className="block md:hidden">
         <div className="container py-4">
           <div className="flex flex-col gap-4 mb-4">
@@ -219,7 +213,7 @@ export function YandexMap() {
         </div>
       </div>
 
-      <div ref={mapRef} className="flex-1 min-h-[70vh]" />
+      <div ref={mapRef} className="flex-1  max-h-[63vh]" />
 
       <div className="hidden md:block">
         <div className="container py-4">
