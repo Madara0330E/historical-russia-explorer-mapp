@@ -31,7 +31,7 @@ export function CommentList({ eventId }: CommentListProps) {
     try {
       const token = Cookies.get("authToken");
       const response = await axios.get(
-        `http://localhost:5000/api/comments/${eventId}`,
+        `https://history-map.spmaxi.ru/api/comments/${eventId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -53,7 +53,7 @@ export function CommentList({ eventId }: CommentListProps) {
   const handleSendCode = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/send-code",
+        "https://history-map.spmaxi.ru/api/auth/send-code",
         email,
         {
           headers: { "Content-Type": "application/json" },
@@ -79,7 +79,7 @@ export function CommentList({ eventId }: CommentListProps) {
   const handleVerifyCode = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/verify-code",
+        "https://history-map.spmaxi.ru/api/auth/verify-code",
         { email, code },
         {
           headers: { "Content-Type": "application/json" },
@@ -127,7 +127,7 @@ export function CommentList({ eventId }: CommentListProps) {
     try {
       const token = Cookies.get("authToken");
       const response = await axios.post(
-        "http://localhost:5000/api/comments",
+        "https://history-map.spmaxi.ru/api/comments",
         { postId: eventId, body: text },
         {
           headers: {
