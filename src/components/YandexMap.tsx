@@ -26,6 +26,7 @@ export function YandexMap() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [clusterer, setClusterer] = useState<any>(null);
 
+
   const [search, setSearch] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<EventCategory[]>(
     []
@@ -50,6 +51,7 @@ export function YandexMap() {
     return matchesSearch && matchesCategory && matchesYearRange;
   });
 
+ 
   useEffect(() => {
     if (!document.getElementById("yandex-maps")) {
       const script = document.createElement("script");
@@ -69,6 +71,7 @@ export function YandexMap() {
       }
     };
   }, []);
+
 
   useEffect(() => {
     if (!isLoaded || !mapRef.current) return;
@@ -99,6 +102,7 @@ export function YandexMap() {
       map.geoObjects.add(newClusterer);
     });
   }, [isLoaded]);
+
 
   useEffect(() => {
     if (!clusterer || !mapInstance) return;
@@ -131,6 +135,7 @@ export function YandexMap() {
     clusterer.add(placemarks);
   }, [filteredEvents, clusterer, mapInstance]);
 
+
   useEffect(() => {
     if (!mapInstance) return;
 
@@ -155,7 +160,7 @@ export function YandexMap() {
   }, [mapInstance]);
 
   return (
-    <div className="flex flex-col min-h-[calc(80vh-4rem)]">
+    <div className="flex flex-col min-h-[calc(100vh-4rem)]">
       <div className="block md:hidden">
         <div className="container py-4">
           <div className="flex flex-col gap-4 mb-4">
@@ -213,7 +218,7 @@ export function YandexMap() {
         </div>
       </div>
 
-      <div ref={mapRef} className="flex-1  max-h-[63vh]" />
+      <div ref={mapRef} className="flex-1 min-h-[70vh]" />
 
       <div className="hidden md:block">
         <div className="container py-4">
