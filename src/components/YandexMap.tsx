@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { events } from "@/data/events";
-import { HistoricalEvent } from "@/types";
+import { HistoricalEvent, EventCategory } from "@/types";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { CommentList } from "@/components/CommentList";
 import { Button } from "@/components/ui/button";
 import { Share2 } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 declare global {
   interface Window {
@@ -22,7 +24,35 @@ export function YandexMap() {
     null
   );
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [clusterer, setClusterer] = useState<any>(null);
 
+  // Состояния для фильтров
+  const [search, setSearch] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState<EventCategory[]>(
+    []
+  );
+  const [startYear, setStartYear] = useState<string>("");
+  const [endYear, setEndYear] = useState<string>("");
+
+  // Фильтрация событий
+  const filteredEvents = events.filter((event) => {
+    const matchesSearch =
+      search === "" ||
+      event.title.toLowerCase().includes(search.toLowerCase()) ||
+      event.description.toLowerCase().includes(search.toLowerCase());
+
+    const matchesCategory =
+      selectedCategories.length === 0 ||
+      selectedCategories.includes(event.category);
+
+    const matchesYearRange =
+      (startYear === "" || event.year >= parseInt(startYear)) &&
+      (endYear === "" || event.year <= parseInt(endYear));
+
+    return matchesSearch && matchesCategory && matchesYearRange;
+  });
+
+  // Инициализация карты
   useEffect(() => {
     if (!document.getElementById("yandex-maps")) {
       const script = document.createElement("script");
@@ -43,6 +73,7 @@ export function YandexMap() {
     };
   }, []);
 
+  // Создание карты и маркеров
   useEffect(() => {
     if (!isLoaded || !mapRef.current) return;
 
@@ -62,41 +93,50 @@ export function YandexMap() {
           "invert(100%) hue-rotate(180deg) brightness(0.8)";
       }
 
-      const clusterer = new window.ymaps.Clusterer({
+      const newClusterer = new window.ymaps.Clusterer({
         preset: "islands#darkBlueClusterIcons",
         groupByCoordinates: false,
         clusterDisableClickZoom: false,
       });
 
-      const placemarks = events.map((event: HistoricalEvent) => {
-        const placemark = new window.ymaps.Placemark(
-          [event.location.lat, event.location.lon],
-          {
-            hintContent: event.title,
-          },
-          {
-            preset:
-              event.category === "battle"
-                ? "islands#redDotIcon"
-                : event.category === "political"
-                ? "islands#darkBlueDotIcon"
-                : "islands#yellowDotIcon",
-          }
-        );
-
-        placemark.events.add("click", () => {
-          setSelectedEvent(event);
-          setIsSheetOpen(true);
-        });
-
-        return placemark;
-      });
-
-      clusterer.add(placemarks);
-      map.geoObjects.add(clusterer);
+      setClusterer(newClusterer);
+      map.geoObjects.add(newClusterer);
     });
   }, [isLoaded]);
 
+  // Обновление маркеров при изменении фильтров
+  useEffect(() => {
+    if (!clusterer || !mapInstance) return;
+
+    const placemarks = filteredEvents.map((event) => {
+      const placemark = new window.ymaps.Placemark(
+        [event.location.lat, event.location.lon],
+        {
+          hintContent: event.title,
+        },
+        {
+          preset:
+            event.category === "battle"
+              ? "islands#redDotIcon"
+              : event.category === "political"
+              ? "islands#darkBlueDotIcon"
+              : "islands#yellowDotIcon",
+        }
+      );
+
+      placemark.events.add("click", () => {
+        setSelectedEvent(event);
+        setIsSheetOpen(true);
+      });
+
+      return placemark;
+    });
+
+    clusterer.removeAll();
+    clusterer.add(placemarks);
+  }, [filteredEvents, clusterer, mapInstance]);
+
+  // Обработка темной темы
   useEffect(() => {
     if (!mapInstance) return;
 
@@ -121,11 +161,123 @@ export function YandexMap() {
   }, [mapInstance]);
 
   return (
-    <>
-      <div
-        ref={mapRef}
-        className="w-full h-[calc(100vh-4rem)] md:h-[calc(100vh-4rem)] h-[calc(70vh-4rem)]"
-      />
+    <div className="flex flex-col min-h-[calc(100vh-4rem)]">
+      <div className="block md:hidden">
+        <div className="container py-4">
+          <div className="flex flex-col gap-4 mb-4">
+            <Input
+              placeholder="Поиск по событиям..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="max-w-md"
+            />
+
+            <div className="flex gap-2">
+              <Input
+                type="number"
+                placeholder="Год от..."
+                value={startYear}
+                onChange={(e) => setStartYear(e.target.value)}
+                className="w-28"
+              />
+              <Input
+                type="number"
+                placeholder="Год до..."
+                value={endYear}
+                onChange={(e) => setEndYear(e.target.value)}
+                className="w-28"
+              />
+            </div>
+
+            <ToggleGroup
+              type="multiple"
+              value={selectedCategories}
+              onValueChange={(value) =>
+                setSelectedCategories(value as EventCategory[])
+              }
+            >
+              <ToggleGroupItem
+                value="battle"
+                className="data-[state=on]:bg-russia-red data-[state=on]:text-white"
+              >
+                Сражения
+              </ToggleGroupItem>
+              <ToggleGroupItem
+                value="political"
+                className="data-[state=on]:bg-russia-blue data-[state=on]:text-white"
+              >
+                Политика
+              </ToggleGroupItem>
+              <ToggleGroupItem
+                value="cultural"
+                className="data-[state=on]:bg-russia-gold data-[state=on]:text-black"
+              >
+                Культура
+              </ToggleGroupItem>
+            </ToggleGroup>
+          </div>
+        </div>
+      </div>
+
+      <div ref={mapRef} className="flex-1 min-h-[70vh]" />
+
+      <div className="hidden md:block">
+        <div className="container py-4">
+          <div className="flex items-center gap-4">
+            <Input
+              placeholder="Поиск по событиям..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="max-w-md"
+            />
+
+            <div className="flex gap-2">
+              <Input
+                type="number"
+                placeholder="Год от..."
+                value={startYear}
+                onChange={(e) => setStartYear(e.target.value)}
+                className="w-28"
+              />
+              <Input
+                type="number"
+                placeholder="Год до..."
+                value={endYear}
+                onChange={(e) => setEndYear(e.target.value)}
+                className="w-28"
+              />
+            </div>
+
+            <ToggleGroup
+              type="multiple"
+              value={selectedCategories}
+              onValueChange={(value) =>
+                setSelectedCategories(value as EventCategory[])
+              }
+              className="flex-shrink-0"
+            >
+              <ToggleGroupItem
+                value="battle"
+                className="data-[state=on]:bg-russia-red data-[state=on]:text-white"
+              >
+                Сражения
+              </ToggleGroupItem>
+              <ToggleGroupItem
+                value="political"
+                className="data-[state=on]:bg-russia-blue data-[state=on]:text-white"
+              >
+                Политика
+              </ToggleGroupItem>
+              <ToggleGroupItem
+                value="cultural"
+                className="data-[state=on]:bg-russia-gold data-[state=on]:text-black"
+              >
+                Культура
+              </ToggleGroupItem>
+            </ToggleGroup>
+          </div>
+        </div>
+      </div>
 
       <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
         <SheetContent className="w-full sm:max-w-xl">
@@ -234,6 +386,6 @@ export function YandexMap() {
           )}
         </SheetContent>
       </Sheet>
-    </>
+    </div>
   );
 }

@@ -7,7 +7,7 @@ export const rulers: Ruler[] = [
     title: "Князь Новгородский",
     startYear: 862,
     endYear: 879,
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Rurikrus.jpg/220px-Rurikrus.jpg"
+    image: "https://avatars.dzeninfra.ru/get-zen_doc/271828/pub_6622409fcbb15a5702f0ed0a_662240e626b0b07859f587bc/scale_1200"
   },
   {
     id: "r2",
@@ -15,7 +15,7 @@ export const rulers: Ruler[] = [
     title: "Великий князь Киевский",
     startYear: 980,
     endYear: 1015,
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/forty-three/St_Volodymyr_the_Great.jpg/220px-St_Volodymyr_the_Great.jpg"
+    image: "https://cdn.culture.ru/images/dfbea8d6-ddae-5e8d-9923-33a37a13c674"
   },
   {
     id: "r3",
@@ -23,7 +23,7 @@ export const rulers: Ruler[] = [
     title: "Великий князь Киевский",
     startYear: 1019,
     endYear: 1054,
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/sixty-seven/Yaroslav_Mudryi.jpg/220px-Yaroslav_Mudryi.jpg"
+    image: "https://avatars.mds.yandex.net/get-entity_search/1965934/936538153/S600xU_2x"
   },
   {
     id: "r4",
@@ -31,7 +31,7 @@ export const rulers: Ruler[] = [
     title: "Великий князь Владимирский",
     startYear: 1252,
     endYear: 1263,
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/fifty-three/Alexander_Nevsky_Seal_1262.jpg/220px-Alexander_Nevsky_Seal_1262.jpg"
+    image: "https://avatars.mds.yandex.net/get-entity_search/1976572/1132723277/S600xU_2x"
   },
   {
     id: "r5",
@@ -39,7 +39,7 @@ export const rulers: Ruler[] = [
     title: "Великий князь Московский",
     startYear: 1359,
     endYear: 1389,
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/fifty-three/Dmitry_Donskoy.jpg/220px-Dmitry_Donskoy.jpg"
+    image: "https://cdn.culture.ru/images/84697985-ec61-59ee-86b5-40f2e921c9ea"
   },
   {
     id: "1",
@@ -47,7 +47,7 @@ export const rulers: Ruler[] = [
     title: "Царь",
     startYear: 1547,
     endYear: 1584,
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Ivan_IV_by_anonim_%281%29.jpg/220px-Ivan_IV_by_anonim_%281%29.jpg"
+    image: "https://avatars.mds.yandex.net/i?id=6587ff24a72ee6bfc1132a036dbb9df74f57b8a9-12728486-images-thumbs&n=13"
   },
   {
     id: "2",
@@ -55,7 +55,7 @@ export const rulers: Ruler[] = [
     title: "Император",
     startYear: 1682,
     endYear: 1725,
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Portrait_of_Peter_I_by_Godfrey_Kneller_-_Google_Cultural_Institute.jpg/220px-Portrait_of_Peter_I_by_Godfrey_Kneller_-_Google_Cultural_Institute.jpg"
+    image: "https://cdn.iz.ru/sites/default/files/styles/1920x1080/public/article-2019-03/Peter_der-Grosse_1838.jpg?itok=ZDqS60xz"
   },
   {
     id: "3",
@@ -63,7 +63,7 @@ export const rulers: Ruler[] = [
     title: "Императрица",
     startYear: 1762,
     endYear: 1796,
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Catherine_II_by_J.B.Lampi_%281780s%2C_Kunsthistorisches_Museum%29.jpg/220px-Catherine_II_by_J.B.Lampi_%281780s%2C_Kunsthistorisches_Museum%29.jpg"
+    image: "https://cdn.culture.ru/c/831132.jpg"
   },
   {
     id: "4",
@@ -71,7 +71,7 @@ export const rulers: Ruler[] = [
     title: "Император",
     startYear: 1894,
     endYear: 1917,
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Tsar_Nicholas_II_-1898.jpg/220px-Tsar_Nicholas_II_-1898.jpg"
+    image: "https://i.pinimg.com/originals/4b/10/8f/4b108fbd100b12066e6e210ca58b33fd.jpg"
   },
   {
     id: "5",
@@ -79,7 +79,7 @@ export const rulers: Ruler[] = [
     title: "Председатель СНК",
     startYear: 1917,
     endYear: 1924,
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Vladimir_Lenin.jpg/220px-Vladimir_Lenin.jpg"
+    image: "https://cdn.abnews.ru/storage/wp-content/uploads/2022/04/portrait_of_vladimir_lenin_1949_czeslaw_znamierowski_private_collection.jpg__0_0x0.jpg"
   },
   {
     id: "6",
@@ -87,7 +87,7 @@ export const rulers: Ruler[] = [
     title: "Генеральный секретарь ЦК ВКП(б)/КПСС",
     startYear: 1924,
     endYear: 1953,
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/CroppedStalin1943.jpg/220px-CroppedStalin1943.jpg"
+    image: "https://ruszamir.ru/wp-content/uploads/2022/09/portret-stalina-variant-3.jpg"
   },
   {
     id: "7",
@@ -95,6 +95,6 @@ export const rulers: Ruler[] = [
     title: "Президент РФ",
     startYear: 2000,
     endYear: 2025,
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Vladimir_Putin_2022-02-24_%28cropped%29.jpg/220px-Vladimir_Putin_2022-02-24_%28cropped%29.jpg"
+    image: "https://s0.rbk.ru/v6_top_pics/media/img/6/52/346879761319526.jpeg"
   }
 ];

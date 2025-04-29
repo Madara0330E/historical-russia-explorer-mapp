@@ -16,6 +16,7 @@ export const events: HistoricalEvent[] = [
     images: [
       "https://cdn.culture.ru/images/bcb97d46-a861-502a-a59f-318885095648",
     ],
+    videos: ["https://rutube.ru/play/embed/2fb26462ce4aec93f8c07be69d43e5df/?&utm_source=embed&utm_medium=referral&utm_campaign=logo&utm_content=2fb26462ce4aec93f8c07be69d43e5df&utm_term=yastatic.net%2F&referrer=appmetrica_tracking_id%3D1037600761300671389%26ym_tracking_id%3D314569153086888243"],
   },
   {
     id: "e2",
@@ -50,7 +51,7 @@ export const events: HistoricalEvent[] = [
     images: [
       "https://cdn.culture.ru/images/5bc9cc6e-dfe7-586a-bb2c-47e72aca66be",
     ],
-    videos: ["https://rutube.ru/video/9c2ac56229e509fef685201823f75fed/"],
+    videos: ["https://rutube.ru/play/embed/bfe5300a1c7fd18b2052f5476743b9df/?r=wd"],
   },
   {
     id: "e4",
@@ -67,7 +68,7 @@ export const events: HistoricalEvent[] = [
     images: [
       "https://svyatye.online/upload/iblock/d4b/1bqirk4lm863pb9t8pohb36ofgzo5xpp.jpg",
     ],
-    videos: ["https://rutube.ru/video/9c6ff77a7f6f553d86b54f62cea122be/"],
+    videos: ["https://rutube.ru/play/embed/22ee3b0d11cb4139081b004f1fe9f15c/?r=wd/"],
   },
   
     {
@@ -82,10 +83,10 @@ export const events: HistoricalEvent[] = [
         "lon": 38.678385
       },
       "images": [
-        "https://rusmuseumvrm.ru/data/collections/painting/19_20/zh_3976/main.jpg",
-        "https://static.culture.ru/crop/9a/e0/9ae0f771-7c96-5fb3-9ce2-cf5c3c037d61.jpg"
+        "https://cdnn21.img.ria.ru/images/155894/06/1558940638_0:34:2189:1265_650x0_80_0_0_37af37bd6fedf74962a1c1128782398f.jpg.webp",
+        "https://sun9-15.userapi.com/impg/b2FrMi7M2Or6ezne9z10BRjJwdDyPea-SpcrQA/OQhhgjUqXE8.jpg?size=604x364&quality=96&sign=aed071e0ee66355904f142a82a23ef0a&type=album"
       ],
-      "videos": ["https://rutube.ru/video/5a1b2c3d4e5f6g7h8i9j0/"]
+      "videos": ["https://rutube.ru/play/embed/34efe4ee8f9c7d8dbf8c392709a373d5/?r=wd"]
     },
     {
       "id": "2",
@@ -99,10 +100,10 @@ export const events: HistoricalEvent[] = [
         "lon": 37.618423
       },
       "images": [
-        "https://rusmuseumvrm.ru/data/collections/painting/19_20/zh_3976/main.jpg",
-        "https://static.culture.ru/crop/68/0f/680f2ddc-7552-5c5e-9e3f-a536f42e9a9e.jpg"
+        "https://api.rbsmi.ru/attachments/c621465fbecb5eb5f9aa4bc0c2ea04c129952064/store/crop/0/0/987/654/1600/0/0/a61dab5fcf0f0a208b8ae04360516bf1ef9785ec196d72a51fde12de0e19/f661f3ace2b54ca8c3bc542488a63391.jpg",
+        "https://alipuff.ru/wp-content/uploads/3/9/d/39d6bac26bab2ca28ac35e35523a7b6a.jpeg"
       ],
-      "videos": ["https://rutube.ru/video/1b2c3d4e5f6g7h8i9j0k1/"]
+      "videos": ["https://rutube.ru/play/embed/7924dc9fe511fdd263a3e9dfac13deee/?r=wd"]
     },
     {
       "id": "3",
@@ -116,10 +117,10 @@ export const events: HistoricalEvent[] = [
         "lon": 30.3350986
       },
       "images": [
-        "https://rusmuseumvrm.ru/data/collections/painting/19_20/zh_3976/main.jpg",
-        "https://rusmuseumvrm.ru/data/collections/photography/20/zh_10000/main.jpg"
+        "https://cdn.culture.ru/images/682f1b4a-97f3-5e4f-bf67-b2d8e5d4e819",
+        "https://files.kick.com/images/channel/31064557/banner_image/ec9926d4-8364-4574-bf25-5a0f13d62bfa"
       ],
-      "videos": ["https://rutube.ru/video/2c3d4e5f6g7h8i9j0k1l2/"]
+      "videos": ["https://rutube.ru/play/embed/286ab1b05582af4e5f1417b1a740b5d8/?r=wd"]
     },
     {
       "id": "4",
@@ -133,10 +134,10 @@ export const events: HistoricalEvent[] = [
         "lon": 37.6156
       },
       "images": [
-        "https://victorymuseum.ru/upload/iblock/7a1/7a1c3e3e2f1d5a9b6c8d0e9f0a1b2c3.jpg",
-        "https://victorymuseum.ru/upload/iblock/9c4/9c4567890abcdef1234567890abcdef.jpg"
+        "https://avatars.mds.yandex.net/i?id=8ba151871b6259a3903ce0995af6832d_l-10782253-images-thumbs&n=13",
+        "https://avatars.mds.yandex.net/i?id=f75cd713eb7c4a047b5dc52df7462eaf_l-9100078-images-thumbs&n=13"
       ],
-      "videos": ["https://rutube.ru/video/3d4e5f6g7h8i9j0k1l2m3/"]
+      "videos": ["https://rutube.ru/play/embed/f8c85e342ac9be8618c6e335da25056e/?r=wd"]
     },
     {
       "id": "5",
@@ -150,9 +151,9 @@ export const events: HistoricalEvent[] = [
         "lon": 45.6167
       },
       "images": [
-        "https://roscosmos.ru/upload/iblock/1a2/1a2b3c4d5e6f7g8h9i0j.jpg",
-        "https://roscosmos.ru/upload/iblock/3e4/3e4f5g6h7i8j9k0l1m2.jpg"
+        "https://cdn-media.tass.ru/width/1200_4ce85301/tass/m2/uploads/i/20190830/5152998.png",
+        "https://sun9-22.userapi.com/s/v1/ig2/ttOlX4FI32ld0EXtfahfMqNyoPUBEHKtAvYRUfV4Bf56aeCwulPb7MMK7HDDMmpxKU6D4sCHx7K7Kqws8w9GEC64.jpg?quality=96&as=32x40,48x60,72x90,108x135,160x200,240x300,360x450,480x600,540x675,640x800,720x900,1080x1350&from=bu&u=y3TKn_Ov7SDV4yRMlm0JqNti81dntymCGejF2fM0nUE&cs=646x807"
       ],
-      "videos": ["https://rutube.ru/video/4e5f6g7h8i9j0k1l2m3n4/"]
+      "videos": ["https://rutube.ru/play/embed/e89e3d1c7d494a3f49792924d9e10c40/?r=wd"]
     }
   ]
