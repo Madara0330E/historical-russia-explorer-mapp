@@ -68,7 +68,7 @@ export function CommentList({ eventId }: CommentListProps) {
         ref={commentsContainerRef}
         className="space-y-4 mb-6"
         style={{
-          maxHeight: "400px",
+          maxHeight: "350px",
           overflowY: "auto",
           scrollbarWidth: "thin",
           scrollbarColor: "#888 #f1f1f1",

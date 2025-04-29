@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -118,15 +117,15 @@
     @apply relative rounded-full bg-russia-red border-2 border-white shadow-md transition-all hover:scale-110 cursor-pointer;
     z-index: 1;
   }
-  
+
   .event-marker.battle {
     @apply bg-russia-red;
   }
-  
+
   .event-marker.political {
     @apply bg-russia-blue;
   }
-  
+
   .event-marker.cultural {
     @apply bg-russia-gold;
   }
